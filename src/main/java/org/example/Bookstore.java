@@ -6,16 +6,18 @@ import org.example.Agents.SellerAgent;
 import java.util.List;
 
 public class Bookstore {
-    private String name;
-    private int id;
-    private List<String> bookTypes;
+    private final String areaCode;
+    private final String name;
+    private final int id;
+    private List<String> books;
     private SellerAgent sellerAgent;
 
-    public Bookstore(String name, int id, List<String> bookTypes, SellerAgent sellerAgent) {
+    public Bookstore(String name, int id, List<String> books,String areaCode) {
         this.name = name;
         this.id = id;
-        this.bookTypes = bookTypes;
+        this.books = books;
         this.sellerAgent = new SellerAgent(id);
+        this.areaCode = areaCode;
 
     }
 
@@ -24,17 +26,11 @@ public class Bookstore {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+
+    public List<String> getBooks() {
+        return books;
     }
 
-    public List<String> getBookTypes() {
-        return bookTypes;
-    }
-
-    public void setBookTypes(List<String> bookTypes) {
-        this.bookTypes = bookTypes;
-    }
 
     public SellerAgent getSellerAgent() {
         return sellerAgent;
@@ -44,11 +40,15 @@ public class Bookstore {
         this.sellerAgent = sellerAgent;
     }
 
-    public ManagerAgent getManagerAgent() {
-        return managerAgent;
-    }
+//    public ManagerAgent getManagerAgent() {
+//        return managerAgent;
+//    }
 
-    public void setManagerAgent(ManagerAgent managerAgent) {
-        this.managerAgent = managerAgent;
+//    public void setManagerAgent(ManagerAgent managerAgent) {
+//        this.managerAgent = managerAgent;
+//    }
+
+    public String getAreaCode() {
+        return areaCode;
     }
 }
