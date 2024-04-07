@@ -37,14 +37,6 @@ public class ClientAgent extends Agent  {
     }
 
 
-
-    public void start(){
-
-
-
-
-    }
-
     protected void takeDown() {
         System.out.println("Client-agent " + getAID()+ " terminating.");
     }
