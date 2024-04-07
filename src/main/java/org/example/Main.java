@@ -1,45 +1,30 @@
 package org.example;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.List;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.Agents.ClientAgent;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Gson gson = new Gson();
+        ObjectMapper mapper = new ObjectMapper();
 
+        try {
+            List<Bookstore> bookstores = mapper.readValue(new File("./agents/bookstores.json"), new TypeReference<List<Bookstore>>(){});
+            // Use the bookstores list...
 
-        try (FileReader reader = new FileReader("./agents/bookstores.json")) {
-            Type bookstoreListType = new TypeToken<List<Bookstore>>() {
-            }.getType();
-            List<Bookstore> bookstores = gson.fromJson(reader, bookstoreListType);
+            List<ClientAgent> clients = mapper.readValue(new File("./agents/clients.json"), new TypeReference<List<ClientAgent>>(){});
+//            // Use the clients list...
+            System.out.println("dupa");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-//            for (Bookstore bookstore : bookstores) {
-////                ManagerAgent managerAgent = new ManagerAgent(bookstore);
-////                bookstore.setManagerAgent(managerAgent);
-//
-//
-//            }
-
-
-            try ( FileReader reader = new FileReader("./agents/clients.json")){
-                Type clientListType = new TypeToken<List<ClientAgent>>() {
-                }.getType();
-                List<ClientAgent> clients = gson.fromJson(reader, clientListType);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
     }
 

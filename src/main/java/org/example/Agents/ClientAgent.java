@@ -200,4 +200,27 @@ public class ClientAgent extends Agent implements Serializable {
     }
 
 
+    //the below is  just fix for jackson to work :/
+    public ClientAgent() {
+        this.book = "";
+        this.areaCode = "";
+    }
+    // Getter for areaCode
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    // Setter for areaCode
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
+    public String getBook() {
+        return book;
+    }
+
+    // Setter for book
+    public void setBook(String book) {
+        this.book = book;
+    }
+
 }
