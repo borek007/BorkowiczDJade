@@ -8,11 +8,14 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.util.leap.Iterator;
+import org.example.Utills.Offer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ClientAgent extends Agent  {
     private String areaCode;
@@ -174,30 +177,6 @@ public class ClientAgent extends Agent  {
         @Override
         public boolean done() {
             return done;
-        }
-    }
-
-    public class Offer {
-        private String seller;
-        private String book;
-        private double price;
-
-        public Offer(String seller, String book, double price) {
-            this.seller = seller;
-            this.book = book;
-            this.price = price;
-        }
-
-        public String getSeller() {
-            return seller;
-        }
-
-        public String getBook() {
-            return book;
-        }
-
-        public double getPrice() {
-            return price;
         }
     }
 
