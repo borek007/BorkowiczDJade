@@ -3,6 +3,7 @@ package org.example.Agents;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.SequentialBehaviour;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import org.example.Bookstore;
@@ -13,7 +14,8 @@ public class ManagerAgent extends Agent {
         this.bookstore = bookstore;
     }
     public void setup() {
-
+        DFAgentDescription dfd = new DFAgentDescription();
+        dfd.setName(getAID());
         //         Add behaviours
         SequentialBehaviour sequentialBehaviour = new SequentialBehaviour();
         sequentialBehaviour.addSubBehaviour(new HandleBookAvailabilityCheckBehaviour(this));

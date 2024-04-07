@@ -4,6 +4,7 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.SequentialBehaviour;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.util.leap.Iterator;
@@ -13,30 +14,38 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class ClientAgent extends Agent implements Serializable {
+public class ClientAgent extends Agent  {
     private String areaCode;
     private String book;
 
     public ClientAgent(String book, String areaCode) {
         this.book = book;
         this.areaCode = areaCode;
+
+    }
+    public void setup() {
+        DFAgentDescription dfd = new DFAgentDescription();
+        dfd.setName(getAID());
+
+//        start1();
     }
 
 
-    public void setup() {
-        System.out.println("Client-agent " + getAID().getName() + " is ready.");
 
-
+    public void start1(){
         SequentialBehaviour buyBookBehaviour = new SequentialBehaviour();
         buyBookBehaviour.addSubBehaviour(new FindBookstoresBehaviour(this));
         buyBookBehaviour.addSubBehaviour(new RequestBookBehaviour(this));
         buyBookBehaviour.addSubBehaviour(new FinishTransactionBehaviour(this));
         addBehaviour(buyBookBehaviour);
+        System.out.println("Client-agent " + getAID() + " is ready.");
+
+
 
     }
 
     protected void takeDown() {
-        System.out.println("Client-agent " + getAID().getName() + " terminating.");
+        System.out.println("Client-agent " + getAID()+ " terminating.");
     }
 
     private class FindBookstoresBehaviour extends Behaviour {
@@ -107,7 +116,7 @@ public class ClientAgent extends Agent implements Serializable {
                 if (reply != null) {
                     // Handle the reply from the SellerAgent
                     // For now, we just print out a message
-                    System.out.println("Received a reply from " + reply.getSender().getName() + " with content: " + reply.getContent());
+//                    System.out.println("Received a reply from " + reply.getSender() + " with content: " + reply.getContent());
                     responses.add(new Offer(reply.getSender().getName(), book, Double.parseDouble(reply.getContent())));
 
                 }
@@ -163,7 +172,7 @@ public class ClientAgent extends Agent implements Serializable {
             msg.addReceiver(new AID(bestOffer.getSeller(), AID.ISLOCALNAME));
             myAgent.send(msg);
             ACLMessage reply = myAgent.blockingReceive(mt);
-            System.out.println("Received a reply from " + reply.getSender().getName() + " with content: " + reply.getContent());
+            System.out.println("Received a reply from " + reply.getSender()+ " with content: " + reply.getContent());
             done = true;
 
 

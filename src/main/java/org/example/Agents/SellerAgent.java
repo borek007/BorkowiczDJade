@@ -2,6 +2,7 @@ package org.example.Agents;
 
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import org.example.Bookstore;
@@ -14,10 +15,13 @@ public class SellerAgent extends Agent {
     }
 
     protected void setup() {
+//        DFAgentDescription dfd = new DFAgentDescription();
+//        dfd.setName(getAID());
+
         System.out.println("Seller-agent "+getAID().getName()+" is ready.");
 
 
-        addBehaviour( new HandleCallForProposalBehaviour(this));
+//        addBehaviour( new HandleCallForProposalBehaviour(this));
 
     }
 

@@ -3,6 +3,7 @@ package org.example.Agents;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import org.example.Bookstore;
@@ -27,6 +28,8 @@ public class DirectorFacilitatorAgent extends jade.core.Agent{
     }
 
     protected void setup() {
+//        DFAgentDescription dfd = new DFAgentDescription();
+//        dfd.setName(getAID());
         addBehaviour(new HandleBookstoresRequestBehaviour(this));
         System.out.println("DirectorFacilitator-agent "+getAID().getName()+" is ready.");
     }
@@ -73,24 +76,7 @@ public class DirectorFacilitatorAgent extends jade.core.Agent{
             return done;
         }
     }
-    private class DiscoverSellerAgentsBehaviour extends Behaviour {
-        private boolean done = false;
 
-        public DiscoverSellerAgentsBehaviour(Agent a) {
-            super(a);
-        }
-
-        public void action() {
-            // Discover SellerAgents
-            // For now, we just print out a message
-            System.out.println("Discovering SellerAgents");
-        }
-
-        @Override
-        public boolean done() {
-            return done;
-        }
-    }
     private class ReturnSellerAgentsBehaviour extends Behaviour {
         private boolean done = false;
         private String areaCode;
