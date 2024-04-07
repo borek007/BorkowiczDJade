@@ -26,19 +26,20 @@ public class ClientAgent extends Agent  {
     public void setup() {
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
-
-//        start1();
-    }
-
-
-
-    public void start1(){
         SequentialBehaviour buyBookBehaviour = new SequentialBehaviour();
         buyBookBehaviour.addSubBehaviour(new FindBookstoresBehaviour(this));
         buyBookBehaviour.addSubBehaviour(new RequestBookBehaviour(this));
         buyBookBehaviour.addSubBehaviour(new FinishTransactionBehaviour(this));
         addBehaviour(buyBookBehaviour);
         System.out.println("Client-agent " + getAID() + " is ready.");
+
+//        start1();
+    }
+
+
+
+    public void start(){
+
 
 
 
