@@ -1,5 +1,6 @@
 package org.example;
 
+import jade.core.Agent;
 import org.example.Agents.ManagerAgent;
 import org.example.Agents.SellerAgent;
 
@@ -8,16 +9,18 @@ import java.util.List;
 public class Bookstore {
     private final String areaCode;
     private final String name;
-    private final int id;
+    private final ManagerAgent managerAgent;
     private List<String> books;
+    private List<Double> prices;
     private SellerAgent sellerAgent;
 
-    public Bookstore(String name, int id, List<String> books,String areaCode) {
+    public Bookstore(String name, List<String> books, List<Double>prices, String areaCode) {
         this.name = name;
-        this.id = id;
         this.books = books;
-        this.sellerAgent = new SellerAgent(id);
+        this.sellerAgent = new SellerAgent(this);
+        this.managerAgent = new ManagerAgent(this);
         this.areaCode = areaCode;
+        this.prices = prices;
 
     }
 
@@ -35,20 +38,15 @@ public class Bookstore {
     public SellerAgent getSellerAgent() {
         return sellerAgent;
     }
-
-    public void setSellerAgent(SellerAgent sellerAgent) {
-        this.sellerAgent = sellerAgent;
+    public double getPrice(String book){
+        return prices.get(books.indexOf(book));
     }
-
-//    public ManagerAgent getManagerAgent() {
-//        return managerAgent;
-//    }
-
-//    public void setManagerAgent(ManagerAgent managerAgent) {
-//        this.managerAgent = managerAgent;
-//    }
 
     public String getAreaCode() {
         return areaCode;
+    }
+
+    public Agent getManagerAgent() {
+        return managerAgent;
     }
 }

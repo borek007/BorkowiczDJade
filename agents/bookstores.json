@@ -1,0 +1,110 @@
+[
+  {
+    "areaCode": "NYC",
+    "name": "Big Apple books",
+    "books": ["Harry Potter and the Sorcerer's Stone", "To Kill a Mockingbird", "1984"],
+    "prices": [15.99, 10.50, 12.75]
+  },
+  {
+    "areaCode": "NYC",
+    "name": "Metropolis Reads",
+    "books": ["Harry Potter and the Sorcerer's Stone", "To Kill a Mockingbird", "1984"],
+    "prices": [14.50, 11.99, 13.25]
+  },
+  {
+    "areaCode": "NYC",
+    "name": "Central Park books",
+    "books": ["Harry Potter and the Sorcerer's Stone", "To Kill a Mockingbird", "1984"],
+    "prices": [16.75, 9.75, 14.99]
+  },
+  {
+    "areaCode": "NYC",
+    "name": "Empire State Novels",
+    "books": ["To Kill a Mockingbird", "1984", "Harry Potter and the Sorcerer's Stone"],
+    "prices": [11.25, 14.99, 16.50]
+  },
+  {
+    "areaCode": "NYC",
+    "name": "Broadway books",
+    "books": ["1984", "Harry Potter and the Sorcerer's Stone", "To Kill a Mockingbird"],
+    "prices": [12.50, 16.25, 10.99]
+  },
+  {
+    "areaCode": "NYC",
+    "name": "Hudson River Reads",
+    "books": ["To Kill a Mockingbird", "1984", "Harry Potter and the Sorcerer's Stone"],
+    "prices": [13.75, 12.99, 15.50]
+  },
+  {
+    "areaCode": "LA",
+    "name": "Sunshine books",
+    "books": ["The Great Gatsby", "The Catcher in the Rye", "Lord of the Flies"],
+    "prices": [11.25, 9.99, 14.50]
+  },
+  {
+    "areaCode": "LA",
+    "name": "City of Angels Reads",
+    "books": ["The Great Gatsby", "The Catcher in the Rye", "Lord of the Flies"],
+    "prices": [12.50, 10.75, 13.99]
+  },
+  {
+    "areaCode": "LA",
+    "name": "Pacific Coast books",
+    "books": ["The Great Gatsby", "The Catcher in the Rye", "Lord of the Flies"],
+    "prices": [13.75, 11.99, 15.25]
+  },
+  {
+    "areaCode": "LA",
+    "name": "Golden State Novels",
+    "books": ["The Catcher in the Rye", "Lord of the Flies", "The Great Gatsby"],
+    "prices": [10.50, 14.25, 12.99]
+  },
+  {
+    "areaCode": "LA",
+    "name": "Hollywood Reads",
+    "books": ["The Great Gatsby", "Lord of the Flies", "The Catcher in the Rye"],
+    "prices": [12.99, 15.50, 11.75]
+  },
+  {
+    "areaCode": "LA",
+    "name": "Santa Monica books",
+    "books": ["The Catcher in the Rye", "The Great Gatsby", "Lord of the Flies"],
+    "prices": [14.25, 12.99, 10.75]
+  },
+  {
+    "areaCode": "CHI",
+    "name": "Windy City books",
+    "books": ["Pride and Prejudice", "The Hobbit", "The Da Vinci Code"],
+    "prices": [13.75, 16.99, 9.75]
+  },
+  {
+    "areaCode": "CHI",
+    "name": "Lake Shore Reads",
+    "books": ["Pride and Prejudice", "The Hobbit", "The Da Vinci Code"],
+    "prices": [12.99, 15.75, 10.50]
+  },
+  {
+    "areaCode": "CHI",
+    "name": "Midwest Pages",
+    "books": ["Pride and Prejudice", "The Hobbit", "The Da Vinci Code"],
+    "prices": [14.50, 16.25, 11.99]
+  },
+  {
+    "areaCode": "CHI",
+    "name": "Magnificent Mile books",
+    "books": ["The Da Vinci Code", "Pride and Prejudice", "The Hobbit"],
+    "prices": [10.75, 13.99, 15.25]
+  },
+  {
+    "areaCode": "CHI",
+    "name": "Loop Novels",
+    "books": ["Pride and Prejudice", "The Hobbit", "The Da Vinci Code"],
+    "prices": [15.25, 10.99, 14.25]
+  },
+  {
+    "areaCode": "CHI",
+    "name": "River North Reads",
+    "books": ["The Da Vinci Code", "The Hobbit", "Pride and Prejudice"],
+    "prices": [13.50, 9.99, 16.50]
+  }
+]

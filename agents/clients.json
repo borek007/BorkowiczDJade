@@ -1,0 +1,54 @@
+[
+  {
+    "areaCode": "CHA",
+    "book": "The Catcher in the Rye"
+  },
+  {
+    "areaCode": "LA",
+    "book": "To Kill a Mockingbird"
+  },
+  {
+    "areaCode": "NYC",
+    "book": "The Da Vinci Code"
+  },
+  {
+    "areaCode": "CHA",
+    "book": "1984"
+  },
+  {
+    "areaCode": "CHA",
+    "book": "Book5"
+  },
+  {
+    "areaCode": "LA",
+    "book": "Book6"
+  },
+  {
+    "areaCode": "NYC",
+    "book": "The Great Gatsby"
+  },
+  {
+    "areaCode": "CHA",
+    "book": "Book8"
+  },
+  {
+    "areaCode": "LA",
+    "book": "Pride and Prejudice"
+  },
+  {
+    "areaCode": "NYC",
+    "book": "The Catcher in the Rye"
+  },
+  {
+    "areaCode": "NYC",
+    "book": "Harry Potter and the Sorcerer's Stone"
+  },
+  {
+    "areaCode": "LA",
+    "book": "The Hobbit"
+  },
+  {
+    "areaCode": "NYC",
+    "book": "The Da Vinci Code"
+  }
+]

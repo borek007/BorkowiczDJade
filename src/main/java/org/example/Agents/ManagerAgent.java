@@ -9,8 +9,11 @@ import org.example.Bookstore;
 
 public class ManagerAgent extends Agent {
     Bookstore bookstore;
-    protected void setup(Bookstore bookstore) {
+    public ManagerAgent(Bookstore bookstore) {
         this.bookstore = bookstore;
+    }
+    public void setup() {
+
         //         Add behaviours
         SequentialBehaviour sequentialBehaviour = new SequentialBehaviour();
         sequentialBehaviour.addSubBehaviour(new HandleBookAvailabilityCheckBehaviour(this));
@@ -41,8 +44,19 @@ public class ManagerAgent extends Agent {
                 // Handle the request from the SellerAgent to check the availability and price of the book
                 // For now, we just print out a message
                 System.out.println("Received a request to check book availability and price from " + msg.getSender().getName());
+                String BookTitle = msg.getContent();
+                if (bookstore.getBooks().contains(BookTitle)) {
+                    ACLMessage reply = msg.createReply();
+                    reply.setPerformative(ACLMessage.AGREE);
+                    reply.setContent(String.valueOf(bookstore.getPrice(BookTitle)));
+                    myAgent.send(reply);
+                } else {
+                    ACLMessage reply = msg.createReply();
+                    reply.setPerformative(ACLMessage.REFUSE);
+                    reply.setContent("-1");
+                    myAgent.send(reply);
+                }
 
-                // TODO: Add logic to check the availability and price of the book
 
                 done = true;
             } else {

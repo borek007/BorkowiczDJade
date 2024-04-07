@@ -23,23 +23,16 @@ public class ClientAgent extends Agent implements Serializable {
     }
 
 
-    protected void setup() {
+    public void setup() {
         System.out.println("Client-agent " + getAID().getName() + " is ready.");
 
-        Object[] args = getArguments();
-        if (args != null && args.length > 0) {
-            areaCode = (String) args[0];
-            System.out.println("Target area code is " + areaCode);
 
-            SequentialBehaviour buyBookBehaviour = new SequentialBehaviour();
-            buyBookBehaviour.addSubBehaviour(new FindBookstoresBehaviour(this));
-            buyBookBehaviour.addSubBehaviour(new RequestBookBehaviour(this));
-            buyBookBehaviour.addSubBehaviour(new FinishTransactionBehaviour(this));
-            addBehaviour(buyBookBehaviour);
-        } else {
-            System.out.println("No target area code specified");
-            doDelete();
-        }
+        SequentialBehaviour buyBookBehaviour = new SequentialBehaviour();
+        buyBookBehaviour.addSubBehaviour(new FindBookstoresBehaviour(this));
+        buyBookBehaviour.addSubBehaviour(new RequestBookBehaviour(this));
+        buyBookBehaviour.addSubBehaviour(new FinishTransactionBehaviour(this));
+        addBehaviour(buyBookBehaviour);
+
     }
 
     protected void takeDown() {
@@ -91,8 +84,8 @@ public class ClientAgent extends Agent implements Serializable {
 
         private void setup() {
             sellerAgents = (List<AID>) getDataStore().get("sellerAgents");
-            msg = new ACLMessage(ACLMessage.REQUEST);
-            msg.setContent("Requesting book: " + book);
+            msg = new ACLMessage(ACLMessage.CFP);
+            msg.setContent(book);
         }
 
         public void action() {
@@ -109,7 +102,7 @@ public class ClientAgent extends Agent implements Serializable {
 
             // Receive the replies
             for (Iterator it = msg.getAllReplyTo(); it.hasNext(); ) {
-                // in case of problems with getAllReplyTo switch to MessageTemplate.MatchInReplyTo
+                //TODO: in case of problems with getAllReplyTo switch to MessageTemplate.MatchInReplyTo
                 ACLMessage reply = (ACLMessage) it.next();
                 if (reply != null) {
                     // Handle the reply from the SellerAgent
@@ -158,7 +151,10 @@ public class ClientAgent extends Agent implements Serializable {
                 done = false;
                 return;
             }
-            Offer bestOffer = responses.stream().min(Comparator.comparingDouble(Offer::getPrice)).get();
+
+            //Our Client is a poor student so he will choose the cheapest offer
+            //we filter out the offers with price -1, it means that the seller doesn't have the book
+            Offer bestOffer = responses.stream().filter(offer->offer.getPrice() != -1).min(Comparator.comparingDouble(Offer::getPrice)).get();
             System.out.println("Best offer: " + bestOffer.getSeller() + " with price: " + bestOffer.getPrice());
 
             MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
