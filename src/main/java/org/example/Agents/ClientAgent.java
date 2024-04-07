@@ -11,12 +11,9 @@ import jade.util.leap.Iterator;
 import org.example.Utills.Offer;
 import org.example.Utils.utils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ClientAgent extends Agent  {
     private String areaCode;
@@ -62,10 +59,10 @@ public class ClientAgent extends Agent  {
             msg.addReceiver(DirectorFacilitatorAgent.getInstance().getAID());
             myAgent.send(msg);
             ACLMessage reply = myAgent.blockingReceive();
-            String content = reply.getContent();
-            String[] AIDS = content.split(",");
-            for (String aid : AIDS) {
-                sellerAgents.add(new AID(aid, AID.ISLOCALNAME));
+            if (reply.getPerformative() == ACLMessage.REFUSE) {
+                System.out.println("NO BOOKSTORES FOUND");
+                myAgent.doDelete();
+                return;
             }
 
 
@@ -161,7 +158,7 @@ public class ClientAgent extends Agent  {
         public void action() {
             List<Offer> responses = (ArrayList<Offer>) getDataStore().get("responses");
             if (responses == null) {
-                done = false;
+                block();
                 return;
             }
 
