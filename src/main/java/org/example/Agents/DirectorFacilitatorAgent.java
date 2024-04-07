@@ -3,6 +3,7 @@ package org.example.Agents;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
+import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -12,34 +13,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DirectorFacilitatorAgent extends jade.core.Agent{
+public class DirectorFacilitatorAgent extends jade.core.Agent {
     private static DirectorFacilitatorAgent instance = null;
-    private DirectorFacilitatorAgent() {}
+    private List<Bookstore> bookstores = new ArrayList<>();
+
+    private DirectorFacilitatorAgent() {
+    }
+
     public static DirectorFacilitatorAgent getInstance() {
         if (instance == null) {
             instance = new DirectorFacilitatorAgent();
         }
         return instance;
     }
-    private List<Bookstore> bookstores = new ArrayList<>();
+
     public void addBookstore(Bookstore bookstore) {
         bookstores.add(bookstore);
-        System.out.println("Adding bookstore "+bookstore.getName());
+        System.out.println("Adding bookstore " + bookstore.getName());
     }
 
     protected void setup() {
 //        DFAgentDescription dfd = new DFAgentDescription();
 //        dfd.setName(getAID());
         addBehaviour(new HandleBookstoresRequestBehaviour(this));
-        System.out.println("DirectorFacilitator-agent "+getAID().getName()+" is ready.");
+        System.out.println("DirectorFacilitator-agent " + getAID().getName() + " is ready.");
     }
 
     protected void takeDown() {
-        System.out.println("DirectorFacilitator-agent "+getAID().getName()+" terminating.");
+        System.out.println("DirectorFacilitator-agent " + getAID().getName() + " terminating.");
     }
 
 
-    private class HandleBookstoresRequestBehaviour extends Behaviour {
+    private class HandleBookstoresRequestBehaviour extends CyclicBehaviour {
         private boolean done = false;
 
         public HandleBookstoresRequestBehaviour(Agent a) {
@@ -51,10 +56,7 @@ public class DirectorFacilitatorAgent extends jade.core.Agent{
             ACLMessage msg = myAgent.receive(mt);
             if (msg != null) {
                 String areaCode = msg.getContent();
-                List<AID> sellerAgents = bookstores.stream()
-                        .filter(b -> b.getAreaCode().equals(areaCode))
-                        .map(bookstore -> bookstore.getSellerAgent().getAID())
-                        .collect(Collectors.toList());
+                List<AID> sellerAgents = bookstores.stream().filter(b -> b.getAreaCode().equals(areaCode)).map(bookstore -> bookstore.getSellerAgent().getAID()).collect(Collectors.toList());
 
                 ACLMessage reply = msg.createReply();
                 if (sellerAgents.isEmpty()) {
@@ -68,13 +70,10 @@ public class DirectorFacilitatorAgent extends jade.core.Agent{
 
                 done = true;
             } else {
-                block();
+                block(1000);
             }
         }
 
-        public boolean done() {
-            return done;
-        }
     }
 
     private class ReturnSellerAgentsBehaviour extends Behaviour {
