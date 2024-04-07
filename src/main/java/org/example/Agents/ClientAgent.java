@@ -9,6 +9,7 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.util.leap.Iterator;
 import org.example.Utills.Offer;
+import org.example.Utils.utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -66,12 +67,19 @@ public class ClientAgent extends Agent  {
             for (String aid : AIDS) {
                 sellerAgents.add(new AID(aid, AID.ISLOCALNAME));
             }
+
+
+            sellerAgents = utils.convertToAIDList(reply.getContent()) ;
+//            for (AID aid : AIDS) {
+//                sellerAgents.add(new AID(aid, AID.ISLOCALNAME));
+//            }
             getDataStore().put("sellerAgents", sellerAgents);
+            System.out.println(myAgent.getName()+": Found " + sellerAgents.size() + " bookstores in area: " + areaCode);
 
         }
 
         public boolean done() {
-            return !sellerAgents.isEmpty();
+            return true;
         }
 
     }
